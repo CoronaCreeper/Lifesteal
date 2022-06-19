@@ -28,6 +28,7 @@ public final class Main extends JavaPlugin {
         registerRecipe();
         getServer().getPluginManager().registerEvents(new DeathListener(), this);
         getServer().getPluginManager().registerEvents(new HeartListener(), this);
+        getCommand("withdraw").setExecutor(new WithdrawCommand());
         Bukkit.getScheduler().runTaskTimerAsynchronously(instance, new Runnable() {
             @Override
             public void run() {
@@ -43,6 +44,8 @@ public final class Main extends JavaPlugin {
     public void onDisable() {
     }
 
+    public static ItemStack heart;
+
     void registerRecipe() {
         ItemStack heartItem = new ItemStack(Material.RED_DYE);
         ItemMeta meta = heartItem.getItemMeta();
@@ -52,13 +55,15 @@ public final class Main extends JavaPlugin {
         lore.add(ChatColor.RED+"Magiczny przedmiot, która dodaje ci serce!");
         meta.setLore(lore);
         heartItem.setItemMeta(meta);
+        heart = heartItem;
         ShapedRecipe recipe = new ShapedRecipe(NamespacedKey.minecraft("heart"), heartItem);
         recipe.shape(
-                " D ",
+                "TDT",
                 "DED",
-                " D ");
-        recipe.setIngredient('D', Material.TOTEM_OF_UNDYING);
+                "TDT");
+        recipe.setIngredient('D', Material.WITHER_SKELETON_SKULL);
         recipe.setIngredient('E', Material.ENCHANTED_GOLDEN_APPLE);
+        recipe.setIngredient('T', Material.TOTEM_OF_UNDYING);
         Bukkit.getServer().addRecipe(recipe);
     }
 }

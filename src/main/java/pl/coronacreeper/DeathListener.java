@@ -28,8 +28,10 @@ public class DeathListener implements Listener {
         }
         if(killers.get(p) == null) return;
         Player damager = killers.get(p);
-        PlayerProfile.setHearts(damager, getHearts(damager)+1);
-        damager.sendMessage(ChatColor.GREEN+"Zyskałeś 1 serce zabijając "+p.getName()+"!");
+        if(PlayerProfile.getHearts(damager)<20) {
+            PlayerProfile.setHearts(damager, getHearts(damager)+1);
+            damager.sendMessage(ChatColor.GREEN+"Zyskałeś 1 serce zabijając "+p.getName()+"!");
+        }
         if(!(tasks.get(p)==null)) {
             scheduler.cancelTask(tasks.get(p));
         }

@@ -3,5 +3,4 @@ version: '${project.version}'
 main: pl.coronacreeper.Main
 api-version: 1.18
 commands:
-  mystery-book:
-    permission: Lifesteal.mysterybook
+  withdraw:
